@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workflow updates — September 2026</title>
+<link rel="icon" href="assets/inriver-mark-ir.svg">
+<style>
+  @font-face {
+    font-family: 'InterVar';
+    src: url('_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/fonts/Inter-VariableFont.ttf') format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
+  }
+  :root {
+    --bg: #ebf1fc;
+    --surface: #ffffff;
+    --navy: #0b2d6e;
+    --navy-deep: #003687;
+    --ink: #191b24;
+    --muted: #5a6472;
+    --hairline: #d5e0f5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'InterVar', 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 72px 24px 96px;
+  }
+  header { margin-bottom: 40px; }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 34px;
+  }
+  .brand img { height: 26px; width: auto; display: block; }
+  h1 {
+    font-size: 34px;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--navy);
+    margin: 0 0 10px;
+  }
+  .sub {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+    margin: 0;
+    max-width: 60ch;
+  }
+  .sub .when { color: var(--ink); font-weight: 500; }
+
+  .list {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    text-decoration: none;
+    color: var(--navy);
+    border-top: 1px solid var(--hairline);
+    border-left: 3px solid transparent;
+    transition: background .14s ease, border-left-color .14s ease;
+  }
+  .row:first-child { border-top: none; }
+  .row:hover {
+    background: #f3f7ff;
+    border-left-color: var(--navy);
+  }
+  .row .name {
+    flex: 1;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+  }
+  .row:hover .name { color: var(--navy-deep); }
+  .chev {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--muted);
+    transition: transform .14s ease, color .14s ease;
+  }
+  .row:hover .chev { color: var(--navy); transform: translateX(3px); }
+
+  footer {
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 48px 18px 72px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="assets/inriver-logo-dark.png" alt="inriver">
+      </div>
+      <h1>Workflow updates</h1>
+      <p class="sub"><span class="when">September 2026</span> — design screens for the workflow experience. Pick a screen below to open the full interactive mockup.</p>
+    </header>
+
+    <nav class="list">
+      <a class="row" href="entity-automation.dc.html">
+        <span class="name">Entity automation</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </a>
+      <a class="row" href="inspire-agent.dc.html">
+        <span class="name">Inspire AI Agent</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </a>
+      <a class="row" href="trigger.dc.html">
+        <span class="name">Trigger</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </a>
+      <a class="row" href="switch.dc.html">
+        <span class="name">Switch</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </a>
+      <a class="row" href="user-assignment.dc.html">
+        <span class="name">User assignment</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </a>
+      <a class="row" href="workflow-settings.dc.html">
+        <span class="name">Workflow settings</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </a>
+      <a class="row" href="panel-shell.dc.html">
+        <span class="name">Panel shell</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </a>
+    </nav>
+
+    <footer>
+      Static export of a Claude design, hosted on GitHub Pages. Each screen is fully interactive.
+    </footer>
+  </div>
+</body>
+</html>

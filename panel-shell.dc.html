@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/inriver-design-tokens.css">
+  <link rel="stylesheet" href="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined">
+  <script src="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: #ebf1fc; font-family: 'Inter', sans-serif; }
+    a { color: #0b2d6e; }
+    a:hover { color: #003687; }
+    @keyframes ivPanelIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  </style>
+</helmet>
+
+<div style="display:flex;height:100vh;width:100%;overflow:hidden;background:#ebf1fc;">
+  <x-import component-from-global-scope="InriverDesignSystem_4656de.InriverAppNav" items="{{ navItems }}" footer="{{ navFooter }}" hint-size="80px,100%"></x-import>
+
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <x-import component-from-global-scope="InriverDesignSystem_4656de.InriverGlobalHeader" logo-src="assets/inriver-logo-dark.png" search-placeholder="Search" avatar-text="AB" hint-size="100%,64px"></x-import>
+
+    <div style="display:flex;align-items:center;gap:16px;min-height:76px;flex-shrink:0;padding:10px 24px;background:#ebf1fc;">
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <div style="font-size:22px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;line-height:1.2;">Page title</div>
+      </div>
+      <button type="button" sc-camel-on-click="{{ openPanel }}" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border:none;background:#0b2d6e;color:#fff;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.1px;cursor:pointer;flex-shrink:0;" style-hover="background:#003687;">
+        <span class="material-icons-outlined" style="font-size:20px;color:#fff;flex-shrink:0;">add</span>
+        Open panel
+      </button>
+    </div>
+
+    <div style="flex:1;background:#fff;overflow:auto;"></div>
+  </div>
+</div>
+
+<sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ true }}">
+  <div sc-camel-on-click="{{ closePanel }}" style="position:fixed;inset:0;background:rgba(0,0,0,0.05);z-index:49;"></div>
+  <aside style="position:fixed;top:0;right:0;width:540px;height:100vh;background:#fff;box-shadow:-8px 0 28px rgba(0,0,0,0.16);z-index:50;display:flex;flex-direction:column;font-family:'Inter',sans-serif;animation:ivPanelIn .22s ease-out;">
+
+    <div style="flex:1;overflow:auto;padding:18px 32px 8px 32px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+        <div style="font-size:22px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">Panel title</div>
+        <span class="material-icons-outlined" sc-camel-on-click="{{ closePanel }}" style="font-size:26px;color:#0b2d6e;flex-shrink:0;cursor:pointer;">close</span>
+      </div>
+
+      <div style="margin-top:20px;display:flex;align-items:baseline;gap:8px;">
+        <span style="font-size:15px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">Context:</span>
+        <span style="font-size:16px;font-weight:400;color:#191b24;">Supporting label</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 16px;margin-top:28px;">
+        <div style="position:relative;">
+          <input type="text" placeholder="Field one" style="width:100%;box-sizing:border-box;height:56px;border:1px solid #727787;border-radius:4px;padding:0 14px;background:#fff;font-family:'Inter',sans-serif;font-size:14px;color:#191b24;outline:none;" style-focus="border-color:#0b2d6e;">
+        </div>
+        <div style="position:relative;">
+          <input type="text" placeholder="Field two" style="width:100%;box-sizing:border-box;height:56px;border:1px solid #727787;border-radius:4px;padding:0 14px;background:#fff;font-family:'Inter',sans-serif;font-size:14px;color:#191b24;outline:none;" style-focus="border-color:#0b2d6e;">
+        </div>
+        <div style="position:relative;">
+          <input type="date" style="width:100%;box-sizing:border-box;height:56px;border:1px solid #727787;border-radius:4px;padding:0 14px;background:#fff;font-family:'Inter',sans-serif;font-size:14px;color:#191b24;outline:none;" style-focus="border-color:#0b2d6e;">
+          <span style="position:absolute;top:-8px;left:10px;padding:0 5px;background:#fff;font-size:12px;color:var(--color-on-surface-variant);letter-spacing:0.15px;">Start date</span>
+        </div>
+        <div style="position:relative;">
+          <input type="date" style="width:100%;box-sizing:border-box;height:56px;border:1px solid #727787;border-radius:4px;padding:0 14px;background:#fff;font-family:'Inter',sans-serif;font-size:14px;color:#191b24;outline:none;" style-focus="border-color:#0b2d6e;">
+          <span style="position:absolute;top:-8px;left:10px;padding:0 5px;background:#fff;font-size:12px;color:var(--color-on-surface-variant);letter-spacing:0.15px;">End date</span>
+        </div>
+      </div>
+
+      <div style="margin-top:28px;">
+        <div style="font-size:15px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">Section heading</div>
+        <div style="margin-top:12px;font-size:14px;line-height:20px;color:#7a8096;">Section content goes here.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:12px;padding:16px 28px 24px 28px;">
+      <button type="button" sc-camel-on-click="{{ closePanel }}" style="height:40px;padding:0 22px;border:1px solid #c2c6d8;background:#fff;color:#0b2d6e;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;" style-hover="background:#ebf1fc;">Cancel</button>
+      <button type="button" style="height:40px;padding:0 26px;border:none;background:#0b2d6e;color:#fff;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.1px;cursor:pointer;" style-hover="background:#003687;">Save</button>
+    </div>
+  </aside>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { panelOpen: true };
+  renderVals() {
+    return {
+      panelOpen: this.state.panelOpen,
+      openPanel: () => this.setState({ panelOpen: true }),
+      closePanel: () => this.setState({ panelOpen: false }),
+      navItems: [
+        { label: 'Home', icon: 'home', active: true },
+        { label: 'Products', icon: 'inventory_2' },
+        { label: 'Media', icon: 'perm_media' },
+        { label: 'Channels', icon: 'hub' },
+        { label: 'Reports', icon: 'insights' },
+      ],
+      navFooter: [{ label: 'Settings', icon: 'settings' }],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

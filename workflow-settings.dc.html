@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/inriver-design-tokens.css">
+  <link rel="stylesheet" href="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined">
+  <script src="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: #ebf1fc; font-family: 'Inter', sans-serif; }
+    a { color: #0b2d6e; }
+    a:hover { color: #003687; }
+  </style>
+</helmet>
+
+<div style="display:flex;flex-direction:column;height:100vh;width:100%;overflow:hidden;background:#fff;font-family:'Inter',sans-serif;">
+
+  <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;background:#ebf1fc;flex-shrink:0;">
+    <div style="width:44px;height:44px;border-radius:9999px;background:#0b2d6e;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">
+      <img src="assets/inriver-mark-ir.svg" alt="inriver" style="width:24px;height:24px;display:block;">
+    </div>
+    <div style="min-width:0;">
+      <div style="font-size:20px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;line-height:1.2;white-space:nowrap;">JCM Workflow Test</div>
+      <div style="margin-top:2px;font-size:13px;color:#0b2d6e;white-space:nowrap;">Entity type: <span style="font-weight:700;">Product</span></div>
+    </div>
+
+    <div style="margin-left:auto;display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:12px;">
+      <span style="font-size:14px;color:{{ activeLabelColor }};">Active</span>
+      <x-import component-from-global-scope="InriverDesignSystem_4656de.Switch" checked="{{ active }}" on-change="{{ toggleActive }}" hint-size="34px,20px"></x-import>
+
+      <div data-menu-root="1" style="position:relative;">
+        <span class="material-icons-outlined" sc-camel-on-click="{{ toggleMenu }}" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9999px;font-size:24px;color:#0b2d6e;cursor:pointer;">more_vert</span>
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+          <ul style="position:absolute;top:46px;right:0;z-index:70;list-style:none;margin:0;padding:4px 0;min-width:180px;background:#fff;border:1px solid #c2c6d8;border-radius:5px;box-shadow:0 4px 16px rgba(11,45,110,0.12);">
+            <li sc-camel-on-click="{{ openSettings }}" style="display:flex;align-items:center;gap:12px;padding:10px 16px;font-size:14px;color:#191b24;cursor:pointer;" style-hover="background:#ebf1fc;">
+Settings
+            </li>
+            <li sc-camel-on-click="{{ openDelete }}" style="display:flex;align-items:center;gap:12px;padding:10px 16px;font-size:14px;color:#191b24;cursor:pointer;" style-hover="background:#ebf1fc;">
+Delete
+            </li>
+          </ul>
+        </sc-if>
+      </div>
+
+      <button type="button" style="height:40px;padding:0 18px;border:1px solid #c2c6d8;background:#fff;color:#0b2d6e;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;flex-shrink:0;" style-hover="background:#ebf1fc;">Switch to read-only</button>
+      <button type="button" style="height:40px;padding:0 22px;border:none;background:#0b2d6e;color:#fff;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.1px;cursor:pointer;white-space:nowrap;flex-shrink:0;" style-hover="background:#003687;">Save workflow</button>
+      <span class="material-icons-outlined" style="font-size:24px;color:#0b2d6e;cursor:pointer;">close</span>
+    </div>
+  </div>
+
+  <div style="flex:1;display:flex;min-height:0;">
+    <div style="width:200px;flex-shrink:0;padding:16px;background:#ebf1fc;display:flex;flex-direction:column;gap:12px;">
+      <sc-for list="{{ paletteItems }}" as="item" hint-placeholder-count="5">
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border:1px solid #c2c6d8;border-radius:5px;font-size:13px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;cursor:grab;">
+          <span class="material-icons-outlined" style="font-size:18px;color:#0b2d6e;flex-shrink:0;">{{ item.icon }}</span>{{ item.label }}
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex:1;min-width:0;background-color:#fff;background-image:radial-gradient(#c2c6d8 1px, transparent 1px);background-size:16px 16px;position:relative;overflow:auto;">
+      <div style="position:absolute;top:48px;left:48px;display:flex;flex-direction:column;gap:36px;">
+        <div style="display:flex;align-items:center;gap:60px;">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;min-width:150px;background:#fff;border:1px solid #c2c6d8;border-radius:5px;box-shadow:0 1px 3px rgba(11,45,110,0.08);font-size:13px;font-weight:700;color:#0b2d6e;">
+            <span class="material-icons-outlined" style="font-size:18px;color:#0b2d6e;">arrow_forward</span>
+            <span style="flex:1;">Trigger</span>
+            <span class="material-icons-outlined" style="font-size:16px;color:#0b2d6e;cursor:pointer;">edit</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;min-width:170px;background:#fff;border:1px solid #c2c6d8;border-radius:5px;box-shadow:0 1px 3px rgba(11,45,110,0.08);font-size:13px;font-weight:700;color:#0b2d6e;">
+            <span class="material-icons-outlined" style="font-size:18px;color:#0b2d6e;">auto_awesome</span>
+            <span style="flex:1;">Inspire AI agent</span>
+            <span class="material-icons-outlined" style="font-size:16px;color:#0b2d6e;cursor:pointer;">edit</span>
+          </div>
+        </div>
+
+        <div style="margin-left:28px;display:flex;flex-direction:column;gap:14px;">
+          <sc-for list="{{ canvasNodes }}" as="node" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;width:180px;background:#fff;border:1px solid #c2c6d8;border-radius:5px;box-shadow:0 1px 3px rgba(11,45,110,0.08);font-size:13px;font-weight:700;color:#0b2d6e;">
+              <span class="material-icons-outlined" style="font-size:18px;color:#0b2d6e;flex-shrink:0;">{{ node.icon }}</span>
+              <span style="flex:1;">{{ node.label }}</span>
+              <span class="material-icons-outlined" style="font-size:16px;color:#0b2d6e;cursor:pointer;">edit</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ settingsOpen }}" hint-placeholder-val="{{ true }}" data-screen-label="Workflow settings dialog">
+    <div sc-camel-on-click="{{ closeAll }}" style="position:fixed;inset:0;background:var(--color-scrim);display:flex;align-items:center;justify-content:center;z-index:1300;padding:24px;">
+      <div sc-camel-on-click="{{ stop }}" style="width:640px;max-width:100%;background:#fff;border-radius:28px;box-shadow:0 8px 32px rgba(11,45,110,0.24);overflow:hidden;display:flex;flex-direction:column;font-family:'Inter',sans-serif;">
+        <div style="padding:24px;background:#e3e9f8;font-size:24px;color:#191b24;">Workflow settings</div>
+        <div style="padding:24px;display:flex;flex-direction:column;gap:20px;">
+          <div>
+            <x-import component-from-global-scope="InriverDesignSystem_4656de.TextField" label="Workflow name" size="md" value="{{ wfName }}" on-change="{{ onWfNameChange }}" maxlength="50" hint-size="100%,56px"></x-import>
+            <div style="margin-top:4px;text-align:right;font-size:12px;color:var(--color-on-surface-variant);">{{ wfCounter }}</div>
+          </div>
+          <x-import component-from-global-scope="InriverDesignSystem_4656de.Select" label="Entity type" size="md" value="{{ entityType }}" on-change="{{ onEntityTypeChange }}" options="{{ entityTypeOptions }}" placeholder="Entity type" hint-size="100%,56px"></x-import>
+          <x-import component-from-global-scope="InriverDesignSystem_4656de.Switch" checked="{{ qualification }}" on-change="{{ toggleQualification }}" label="Qualification rule (applies to all triggers)" hint-size="auto,24px"></x-import>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:12px;padding:8px 24px 24px;">
+          <button type="button" sc-camel-on-click="{{ closeAll }}" style="height:40px;padding:0 22px;border:1px solid #c2c6d8;background:#fff;color:#0b2d6e;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;" style-hover="background:#ebf1fc;">Cancel</button>
+          <button type="button" sc-camel-on-click="{{ closeAll }}" disabled="{{ saveDisabled }}" style="height:40px;padding:0 26px;border:none;background:{{ saveBg }};color:{{ saveColor }};border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.1px;cursor:{{ saveCursor }};">Save</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ deleteOpen }}" hint-placeholder-val="{{ false }}">
+    <div sc-camel-on-click="{{ closeAll }}" style="position:fixed;inset:0;background:var(--color-scrim);display:flex;align-items:center;justify-content:center;z-index:1300;padding:24px;">
+      <div sc-camel-on-click="{{ stop }}" style="width:520px;max-width:100%;background:#fff;border-radius:28px;box-shadow:0 8px 32px rgba(11,45,110,0.24);overflow:hidden;display:flex;flex-direction:column;font-family:'Inter',sans-serif;">
+        <div style="padding:24px;background:#e3e9f8;font-size:24px;color:#191b24;">Are you sure you want to delete?</div>
+        <div style="padding:24px;font-size:14px;line-height:20px;color:var(--color-on-surface-variant);">This operation can't be undone.</div>
+        <div style="display:flex;justify-content:flex-end;gap:12px;padding:8px 24px 24px;">
+          <button type="button" sc-camel-on-click="{{ closeAll }}" style="height:40px;padding:0 22px;border:1px solid #c2c6d8;background:#fff;color:#0b2d6e;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;" style-hover="background:#ebf1fc;">Cancel</button>
+          <button type="button" sc-camel-on-click="{{ closeAll }}" style="height:40px;padding:0 30px;border:none;background:#0b2d6e;color:#fff;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.1px;cursor:pointer;" style-hover="background:#003687;">Delete</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = {
+    active: false,
+    menuOpen: false,
+    settingsOpen: true,
+    deleteOpen: false,
+    wfName: 'Expression Check For Zendesk  Ticket- 82035',
+    entityType: 'Resource',
+    qualification: false,
+  };
+
+  componentDidMount() {
+    this._onDocDown = (e) => {
+      if (e.target.closest && e.target.closest('[data-menu-root]')) return;
+      const off = {};
+      if (this.state.menuOpen) off.menuOpen = false;
+      if (Object.keys(off).length) this.setState(off);
+    };
+    document.addEventListener('mousedown', this._onDocDown, true);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this._onDocDown, true);
+  }
+
+  renderVals() {
+    const s = this.state;
+    return {
+      active: s.active,
+      activeLabelColor: s.active ? '#191b24' : 'rgba(25,27,36,0.38)',
+      toggleActive: (v) => this.setState({ active: v }),
+      menuOpen: s.menuOpen,
+      settingsOpen: s.settingsOpen,
+      deleteOpen: s.deleteOpen,
+      toggleMenu: () => this.setState((st) => ({ menuOpen: !st.menuOpen })),
+      openSettings: () => this.setState({ settingsOpen: true, menuOpen: false }),
+      openDelete: () => this.setState({ deleteOpen: true, menuOpen: false }),
+      closeAll: () => this.setState({ settingsOpen: false, deleteOpen: false, menuOpen: false }),
+      stop: (e) => e.stopPropagation(),
+      wfName: s.wfName,
+      wfCounter: `${s.wfName.length} / 50`,
+      saveDisabled: s.wfName.trim().length === 0,
+      saveBg: s.wfName.trim().length === 0 ? 'rgba(11,45,110,0.12)' : '#0b2d6e',
+      saveColor: s.wfName.trim().length === 0 ? 'rgba(25,27,36,0.38)' : '#fff',
+      saveCursor: s.wfName.trim().length === 0 ? 'not-allowed' : 'pointer',
+      onWfNameChange: (e) => this.setState({ wfName: e.target.value.slice(0, 50) }),
+      entityType: s.entityType,
+      onEntityTypeChange: (v) => this.setState({ entityType: v }),
+      entityTypeOptions: ['Product', 'Resource', 'Item', 'Channel'],
+      qualification: s.qualification,
+      toggleQualification: (v) => this.setState({ qualification: v }),
+      paletteItems: [
+        { label: 'Trigger', icon: 'arrow_forward' },
+        { label: 'User assignment', icon: 'person' },
+        { label: 'Switch', icon: 'call_split' },
+        { label: 'Entity automation', icon: 'folder_special' },
+        { label: 'Inspire AI agent', icon: 'auto_awesome' },
+      ],
+      canvasNodes: [
+        { label: 'Switch', icon: 'call_split' },
+        { label: 'Entity automation', icon: 'folder_special' },
+        { label: 'Inspire AI agent', icon: 'auto_awesome' },
+        { label: 'User assignment', icon: 'person' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/inriver-design-tokens.css">
+  <link rel="stylesheet" href="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined">
+  <script src="_ds/inflow-design-system-react-4656de98-77ff-4a43-9b32-0fad2779965b/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: #ebf1fc; font-family: 'Inter', sans-serif; }
+    a { color: #0b2d6e; }
+    a:hover { color: #003687; }
+    @keyframes ivPanelIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  </style>
+</helmet>
+
+<div style="display:flex;height:100vh;width:100%;overflow:hidden;background:#ebf1fc;">
+  <x-import component-from-global-scope="InriverDesignSystem_4656de.InriverAppNav" items="{{ navItems }}" footer="{{ navFooter }}" hint-size="80px,100%"></x-import>
+
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+    <x-import component-from-global-scope="InriverDesignSystem_4656de.InriverGlobalHeader" logo-src="assets/inriver-logo-dark.png" search-placeholder="Search" avatar-text="AB" hint-size="100%,64px"></x-import>
+
+    <div style="display:flex;align-items:center;gap:16px;min-height:76px;flex-shrink:0;padding:10px 24px;background:#ebf1fc;">
+      <div style="font-size:22px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;line-height:1.2;">Page title</div>
+      <button type="button" sc-camel-on-click="{{ openPanel }}" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border:none;background:#0b2d6e;color:#fff;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.1px;cursor:pointer;flex-shrink:0;" style-hover="background:#003687;">
+        <span class="material-icons-outlined" style="font-size:20px;color:#fff;flex-shrink:0;">add</span>
+        Open panel
+      </button>
+    </div>
+
+    <div style="flex:1;background:#fff;overflow:auto;"></div>
+  </div>
+</div>
+
+<sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ true }}">
+  <aside style="position:fixed;top:0;right:0;width:540px;height:100vh;background:#fff;border-left:1px solid #c2c6d8;box-shadow:-8px 0 28px rgba(0,0,0,0.16);z-index:50;display:flex;flex-direction:column;font-family:'Inter',sans-serif;animation:ivPanelIn .22s ease-out;">
+
+    <sc-if value="{{ showMain }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;align-items:center;gap:14px;padding:16px 24px;flex-shrink:0;">
+      <div style="font-size:22px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">User assignment</div>
+      <span class="material-icons-outlined" sc-camel-on-click="{{ closePanel }}" style="margin-left:auto;font-size:24px;color:#0b2d6e;flex-shrink:0;cursor:pointer;">close</span>
+    </div>
+
+    <div style="flex:1;overflow:auto;padding:8px 24px 24px;">
+      <x-import component-from-global-scope="InriverDesignSystem_4656de.TextField" label="Name" size="md" value="{{ name }}" on-change="{{ onNameChange }}" maxlength="50" hint-size="100%,56px"></x-import>
+      <div style="margin-top:4px;text-align:right;font-size:12px;color:var(--color-on-surface-variant);">{{ counter }}</div>
+
+      <div style="margin-top:16px;font-size:14px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">Assignments</div>
+
+      <sc-for list="{{ assignments }}" as="a" hint-placeholder-count="0">
+        <div style="margin-top:12px;display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid #c2c6d8;border-radius:4px;background:#fff;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">{{ a.assignee }}</div>
+            <div style="margin-top:2px;font-size:13px;line-height:18px;color:var(--color-on-surface-variant);">{{ a.detail }}</div>
+          </div>
+          <span class="material-icons-outlined" sc-camel-on-click="{{ a.edit }}" style="font-size:20px;color:#0b2d6e;cursor:pointer;flex-shrink:0;">edit</span>
+          <span class="material-icons-outlined" sc-camel-on-click="{{ a.remove }}" style="font-size:20px;color:#0b2d6e;cursor:pointer;flex-shrink:0;">delete_outline</span>
+        </div>
+      </sc-for>
+
+      <div style="padding-top:16px;">
+        <x-import component-from-global-scope="InriverDesignSystem_4656de.Button" variant="outlined" size="small" on-click="{{ goToAssignment }}" hint-size="auto,30px">Add assignment</x-import>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:12px;padding:16px 24px 24px;flex-shrink:0;">
+      <button type="button" sc-camel-on-click="{{ closePanel }}" style="height:40px;padding:0 22px;border:1px solid #c2c6d8;background:#fff;color:#0b2d6e;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;" style-hover="background:#ebf1fc;">Cancel</button>
+      <button type="button" style="height:40px;padding:0 26px;border:none;background:#0b2d6e;color:#fff;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.1px;cursor:pointer;" style-hover="background:#003687;">Done</button>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ showAssignment }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 24px;flex-shrink:0;">
+      <span class="material-icons-outlined" sc-camel-on-click="{{ goToMain }}" style="font-size:24px;color:#0b2d6e;flex-shrink:0;cursor:pointer;">arrow_back</span>
+      <div style="font-size:22px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">Assignment details</div>
+      <span class="material-icons-outlined" sc-camel-on-click="{{ closePanel }}" style="margin-left:auto;font-size:24px;color:#0b2d6e;flex-shrink:0;cursor:pointer;">close</span>
+    </div>
+
+    <div style="flex:1;overflow:auto;padding:8px 24px 24px;display:flex;flex-direction:column;gap:20px;">
+      <div>
+        <x-import component-from-global-scope="InriverDesignSystem_4656de.TextField" label="Name" size="md" value="{{ aName }}" on-change="{{ onANameChange }}" maxlength="50" hint-size="100%,56px"></x-import>
+        <div style="margin-top:4px;text-align:right;font-size:12px;color:var(--color-on-surface-variant);">{{ aCounter }}</div>
+      </div>
+
+      <div style="border:1px solid #c2c6d8;border-radius:4px;overflow:hidden;flex-shrink:0;">
+        <div style="display:flex;align-items:center;gap:4px;padding:8px 10px;border-bottom:1px solid #c2c6d8;background:#fff;">
+          <div style="display:flex;align-items:center;gap:10px;padding-right:12px;border-right:1px solid #c2c6d8;"><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">format_align_left</span><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">format_align_center</span><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">format_align_right</span><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">format_align_justify</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:0 12px;border-right:1px solid #c2c6d8;"><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">format_bold</span><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">format_italic</span><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">format_underlined</span><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">strikethrough_s</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding-left:12px;"><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">undo</span><span class="material-icons-outlined" style="font-size:20px;color:#191b24;cursor:pointer;">redo</span></div>
+        </div>
+        <textarea placeholder="Provide assignment instructions" style="display:block;width:100%;box-sizing:border-box;min-height:132px;border:none;outline:none;resize:vertical;padding:14px 16px;font-family:'Inter',sans-serif;font-size:14px;line-height:20px;color:#191b24;"></textarea>
+      </div>
+
+      <div>
+      <div data-menu-root="1" style="position:relative;">
+        <div sc-camel-on-click="{{ toggleUserMenu }}" style="position:relative;display:flex;align-items:center;gap:8px;height:56px;box-sizing:border-box;padding:0 40px 0 10px;border:1px solid #727787;border-radius:4px;background:#fff;cursor:pointer;">
+          <span style="position:absolute;top:0;left:8px;transform:translateY(-50%);padding:0 4px;background:#fff;font-size:12px;color:var(--color-on-surface-variant);">Users</span>
+          <sc-if value="{{ userChipsEmpty }}" hint-placeholder-val="{{ true }}">
+            <span style="padding-left:4px;font-size:14px;color:var(--color-on-surface-variant);">Select user(s) responsible</span>
+          </sc-if>
+          <sc-for list="{{ userChips }}" as="chip" hint-placeholder-count="0">
+            <x-import component-from-global-scope="InriverDesignSystem_4656de.Chip" label="{{ chip.label }}" variant="filled" size="sm" on-delete="{{ chip.remove }}" hint-size="auto,24px"></x-import>
+          </sc-for>
+          <span class="material-icons-outlined" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--color-on-surface-variant);">expand_more</span>
+        </div>
+        <sc-if value="{{ userMenuOpen }}" hint-placeholder-val="{{ false }}">
+          <ul style="position:absolute;top:60px;left:0;right:0;z-index:60;list-style:none;margin:0;padding:4px 0;background:#fff;border:1px solid #c2c6d8;border-radius:5px;box-shadow:0 4px 16px rgba(11,45,110,0.12);max-height:240px;overflow:auto;">
+            <sc-for list="{{ userOptions }}" as="opt" hint-placeholder-count="4">
+              <li sc-camel-on-click="{{ opt.toggle }}" style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;font-size:14px;color:#191b24;background:{{ opt.bg }};">
+                <span style="flex:1;">{{ opt.label }}</span>
+                <sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}"><span class="material-icons-outlined" style="font-size:18px;color:#0b2d6e;">check</span></sc-if>
+              </li>
+            </sc-for>
+          </ul>
+        </sc-if>
+      </div>
+      </div>
+
+      <div>
+      <div data-menu-root="1" style="position:relative;">
+        <div sc-camel-on-click="{{ toggleRoleMenu }}" style="position:relative;display:flex;align-items:center;gap:8px;height:56px;box-sizing:border-box;padding:0 40px 0 10px;border:1px solid #727787;border-radius:4px;background:#fff;cursor:pointer;">
+          <span style="position:absolute;top:0;left:8px;transform:translateY(-50%);padding:0 4px;background:#fff;font-size:12px;color:var(--color-on-surface-variant);">Roles</span>
+          <sc-if value="{{ roleChipsEmpty }}" hint-placeholder-val="{{ true }}">
+            <span style="padding-left:4px;font-size:14px;color:var(--color-on-surface-variant);">Select role(s) responsible</span>
+          </sc-if>
+          <sc-for list="{{ roleChips }}" as="chip" hint-placeholder-count="0">
+            <x-import component-from-global-scope="InriverDesignSystem_4656de.Chip" label="{{ chip.label }}" variant="filled" size="sm" on-delete="{{ chip.remove }}" hint-size="auto,24px"></x-import>
+          </sc-for>
+          <span class="material-icons-outlined" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--color-on-surface-variant);">expand_more</span>
+        </div>
+        <sc-if value="{{ roleMenuOpen }}" hint-placeholder-val="{{ false }}">
+          <ul style="position:absolute;top:60px;left:0;right:0;z-index:60;list-style:none;margin:0;padding:4px 0;background:#fff;border:1px solid #c2c6d8;border-radius:5px;box-shadow:0 4px 16px rgba(11,45,110,0.12);max-height:240px;overflow:auto;">
+            <sc-for list="{{ roleOptions }}" as="opt" hint-placeholder-count="4">
+              <li sc-camel-on-click="{{ opt.toggle }}" style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;font-size:14px;color:#191b24;background:{{ opt.bg }};">
+                <span style="flex:1;">{{ opt.label }}</span>
+                <sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}"><span class="material-icons-outlined" style="font-size:18px;color:#0b2d6e;">check</span></sc-if>
+              </li>
+            </sc-for>
+          </ul>
+        </sc-if>
+      </div>
+      </div>
+
+      <div style="font-size:16px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">Completion requirements</div>
+      <x-import component-from-global-scope="InriverDesignSystem_4656de.Select" label="Condition type" size="md" value="{{ conditionType }}" on-change="{{ onConditionTypeChange }}" options="{{ conditionTypeOptions }}" placeholder="Condition type" hint-size="100%,56px"></x-import>
+      <x-import component-from-global-scope="InriverDesignSystem_4656de.Select" label="Field type" size="md" value="{{ fieldType }}" on-change="{{ onFieldTypeChange }}" options="{{ fieldTypeOptions }}" placeholder="Field type" hint-size="100%,56px"></x-import>
+
+      <div style="font-size:16px;font-weight:700;color:#0b2d6e;letter-spacing:0.15px;">Workspace settings</div>
+      <div>
+        <x-import component-from-global-scope="InriverDesignSystem_4656de.Select" label="Workspace" size="md" value="{{ workspace }}" on-change="{{ onWorkspaceChange }}" options="{{ workspaceOptions }}" placeholder="Workspace" hint-size="100%,56px"></x-import>
+        <div style="margin-top:4px;font-size:12px;color:var(--color-on-surface-variant);">{{ workspaceHint }}</div>
+      </div>
+
+      <x-import component-from-global-scope="InriverDesignSystem_4656de.Switch" checked="{{ predefined }}" on-change="{{ togglePredefined }}" label="Use a pre-defined workspace structure from the table view." hint-size="auto,24px"></x-import>
+
+      <sc-if value="{{ predefined }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;min-width:0;">
+            <x-import component-from-global-scope="InriverDesignSystem_4656de.Select" label="Workspace data structures" size="md" value="{{ dataStructure }}" on-change="{{ onDataStructureChange }}" options="{{ dataStructureOptions }}" placeholder="No configuration" hint-size="100%,56px"></x-import>
+          </div>
+          <span class="material-icons-outlined" style="font-size:24px;color:#0b2d6e;cursor:pointer;flex-shrink:0;">autorenew</span>
+        </div>
+        <div style="margin-top:4px;font-size:12px;color:var(--color-on-surface-variant);">{{ dataStructureHint }}</div>
+      </sc-if>
+
+      <sc-if value="{{ notPredefined }}" hint-placeholder-val="{{ true }}">
+      <div data-menu-root="1" style="position:relative;">
+        <div sc-camel-on-click="{{ toggleRelFieldMenu }}" style="position:relative;display:flex;align-items:center;gap:8px;height:56px;box-sizing:border-box;padding:0 40px 0 10px;border:1px solid #727787;border-radius:4px;background:#fff;cursor:pointer;">
+          <span style="position:absolute;top:0;left:8px;transform:translateY(-50%);padding:0 4px;background:#fff;font-size:12px;color:var(--color-on-surface-variant);">Assignment relevant fields</span>
+          <sc-if value="{{ relFieldChipsEmpty }}" hint-placeholder-val="{{ true }}">
+            <span style="padding-left:4px;font-size:14px;color:var(--color-on-surface-variant);">select fields to highlight in enrich</span>
+          </sc-if>
+          <sc-for list="{{ relFieldChips }}" as="chip" hint-placeholder-count="0">
+            <x-import component-from-global-scope="InriverDesignSystem_4656de.Chip" label="{{ chip.label }}" variant="filled" size="sm" on-delete="{{ chip.remove }}" hint-size="auto,24px"></x-import>
+          </sc-for>
+          <span class="material-icons-outlined" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--color-on-surface-variant);">expand_more</span>
+        </div>
+        <sc-if value="{{ relFieldMenuOpen }}" hint-placeholder-val="{{ false }}">
+          <ul style="position:absolute;top:60px;left:0;right:0;z-index:60;list-style:none;margin:0;padding:4px 0;background:#fff;border:1px solid #c2c6d8;border-radius:5px;box-shadow:0 4px 16px rgba(11,45,110,0.12);max-height:240px;overflow:auto;">
+            <sc-for list="{{ relFieldOptions }}" as="opt" hint-placeholder-count="4">
+              <li sc-camel-on-click="{{ opt.toggle }}" style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;font-size:14px;color:#191b24;background:{{ opt.bg }};">
+                <span style="flex:1;">{{ opt.label }}</span>
+                <sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}"><span class="material-icons-outlined" style="font-size:18px;color:#0b2d6e;">check</span></sc-if>
+              </li>
+            </sc-for>
+          </ul>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <x-import component-from-global-scope="InriverDesignSystem_4656de.Checkbox" checked="{{ allowSwitch }}" on-change="{{ toggleAllowSwitch }}" label="Allow users to switch workspaces" hint-size="auto,20px"></x-import>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:12px;padding:16px 24px 24px;flex-shrink:0;">
+      <button type="button" sc-camel-on-click="{{ goToMain }}" style="height:40px;padding:0 22px;border:1px solid #c2c6d8;background:#fff;color:#0b2d6e;border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;" style-hover="background:#ebf1fc;">Back</button>
+      <button type="button" sc-camel-on-click="{{ addAssignment }}" disabled="{{ addDisabled }}" style="height:40px;padding:0 26px;border:none;background:{{ addBg }};color:{{ addColor }};border-radius:5px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.1px;cursor:{{ addCursor }};">Add</button>
+    </div>
+    </sc-if>
+  </aside>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+const USERS = ['Anna Bergstrom', 'Marcus Lee', 'Priya Raman', 'Tom Keller', 'Sofia Alvarez'];
+const ROLES = ['Reviewer', 'Approver', 'Editor', 'Observer'];
+const REL_FIELDS = ['Product name', 'Short description', 'Long description', 'Marketing copy', 'SEO title'];
+
+class Component extends DCLogic {
+  state = {
+    panelOpen: true,
+    name: 'User Assignment',
+    view: 'main',
+    assignments: [],
+    editIndex: null,
+    aName: 'New Assignment',
+    users: [],
+    roles: [],
+    relFields: [],
+    userMenuOpen: false,
+    roleMenuOpen: false,
+    relFieldMenuOpen: false,
+    conditionType: '',
+    fieldType: '',
+    workspace: 'Enrich',
+    predefined: false,
+    dataStructure: 'No configuration',
+    allowSwitch: false,
+  };
+
+  toggleIn(key, v) {
+    this.setState((s) => {
+      const arr = s[key];
+      return { [key]: arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v] };
+    });
+  }
+
+
+  componentDidMount() {
+    this._onDocDown = (e) => {
+      if (e.target.closest && e.target.closest('[data-menu-root]')) return;
+      const off = {};
+      if (this.state.userMenuOpen) off.userMenuOpen = false;
+      if (this.state.roleMenuOpen) off.roleMenuOpen = false;
+      if (this.state.relFieldMenuOpen) off.relFieldMenuOpen = false;
+      if (Object.keys(off).length) this.setState(off);
+    };
+    document.addEventListener('mousedown', this._onDocDown, true);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this._onDocDown, true);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const chips = (key) => s[key].map((label) => ({
+      label,
+      remove: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.toggleIn(key, label); },
+    }));
+    const opts = (key, list) => list.map((label) => ({
+      label,
+      selected: s[key].includes(label),
+      bg: s[key].includes(label) ? '#f1f6fe' : 'transparent',
+      toggle: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.toggleIn(key, label); },
+    }));
+    const valid = s.aName.trim().length > 0 && s.users.length > 0 && s.roles.length > 0;
+    return {
+      panelOpen: s.panelOpen,
+      openPanel: () => this.setState({ panelOpen: true }),
+      closePanel: () => this.setState({ panelOpen: false }),
+      name: s.name,
+      counter: `${s.name.length} / 50`,
+      onNameChange: (e) => this.setState({ name: e.target.value.slice(0, 50) }),
+      showMain: s.view === 'main',
+      showAssignment: s.view === 'assignment',
+      goToAssignment: () => this.setState({ view: 'assignment', editIndex: null, aName: 'New Assignment', users: [], roles: [], relFields: [], conditionType: '', fieldType: '', workspace: 'Enrich', predefined: false, dataStructure: 'No configuration', allowSwitch: false }),
+      goToMain: () => this.setState({ view: 'main' }),
+      aName: s.aName,
+      aCounter: s.aName.length + ' / 50',
+      onANameChange: (e) => this.setState({ aName: e.target.value.slice(0, 50) }),
+      userChips: chips('users'),
+      userChipsEmpty: s.users.length === 0,
+      userOptions: opts('users', USERS),
+      userMenuOpen: s.userMenuOpen,
+      toggleUserMenu: () => this.setState((st) => ({ userMenuOpen: !st.userMenuOpen, roleMenuOpen: false, relFieldMenuOpen: false })),
+      roleChips: chips('roles'),
+      roleChipsEmpty: s.roles.length === 0,
+      roleOptions: opts('roles', ROLES),
+      roleMenuOpen: s.roleMenuOpen,
+      toggleRoleMenu: () => this.setState((st) => ({ roleMenuOpen: !st.roleMenuOpen, userMenuOpen: false, relFieldMenuOpen: false })),
+      relFieldChips: chips('relFields'),
+      relFieldChipsEmpty: s.relFields.length === 0,
+      relFieldOptions: opts('relFields', REL_FIELDS),
+      relFieldMenuOpen: s.relFieldMenuOpen,
+      toggleRelFieldMenu: () => this.setState((st) => ({ relFieldMenuOpen: !st.relFieldMenuOpen, userMenuOpen: false, roleMenuOpen: false })),
+      conditionType: s.conditionType,
+      onConditionTypeChange: (v) => this.setState({ conditionType: v }),
+      conditionTypeOptions: ['Field Condition', 'Entity Condition', 'Workflow Condition'],
+      fieldType: s.fieldType,
+      onFieldTypeChange: (v) => this.setState({ fieldType: v }),
+      fieldTypeOptions: ['Text', 'Localized text', 'Number', 'Boolean', 'Date', 'Media'],
+      workspace: s.workspace,
+      onWorkspaceChange: (v) => this.setState({ workspace: v }),
+      workspaceOptions: ['Enrich', 'Review', 'Translate', 'Publish'],
+      workspaceHint: 'The assignee will be redirected to ' + (s.workspace || 'the selected') + ' workspace',
+      predefined: s.predefined,
+      notPredefined: !s.predefined,
+      dataStructure: s.dataStructure,
+      onDataStructureChange: (v) => this.setState({ dataStructure: v }),
+      dataStructureOptions: ['No configuration', 'Enrich default structure', 'Localization structure', 'Merchandising structure'],
+      dataStructureHint: 'Assignments using the ' + (s.workspace || 'selected') + ' workspace stores their...',
+      togglePredefined: (v) => this.setState({ predefined: v }),
+      allowSwitch: s.allowSwitch,
+      toggleAllowSwitch: (v) => this.setState({ allowSwitch: v }),
+      assignments: s.assignments.map((a, i) => ({
+        assignee: a.name,
+        detail: a.detail,
+        edit: () => this.setState({ view: 'assignment', editIndex: i, aName: a.name, users: a.users, roles: a.roles, relFields: a.relFields, conditionType: a.conditionType, fieldType: a.fieldType, workspace: a.workspace, predefined: a.predefined, allowSwitch: a.allowSwitch }),
+        remove: () => this.setState((st) => ({ assignments: st.assignments.filter((_, j) => j !== i) })),
+      })),
+      addDisabled: !valid,
+      addBg: valid ? '#0b2d6e' : 'rgba(11,45,110,0.12)',
+      addColor: valid ? '#fff' : 'rgba(25,27,36,0.38)',
+      addCursor: valid ? 'pointer' : 'not-allowed',
+      addAssignment: () => this.setState((st) => {
+        const parts = [];
+        if (st.users.length) parts.push(st.users.join(', '));
+        if (st.roles.length) parts.push(st.roles.join(', '));
+        if (st.workspace) parts.push(st.workspace + ' workspace');
+        const item = {
+          name: st.aName || 'Untitled assignment',
+          detail: parts.join(' \u00b7 '),
+          users: st.users, roles: st.roles, relFields: st.relFields,
+          conditionType: st.conditionType, fieldType: st.fieldType,
+          workspace: st.workspace, predefined: st.predefined, allowSwitch: st.allowSwitch,
+        };
+        const list = st.editIndex === null ? [...st.assignments, item] : st.assignments.map((a, i) => (i === st.editIndex ? item : a));
+        return { assignments: list, view: 'main', editIndex: null };
+      }),
+      navItems: [
+        { label: 'Home', icon: 'home' },
+        { label: 'Products', icon: 'inventory_2' },
+        { label: 'Media', icon: 'perm_media' },
+        { label: 'Channels', icon: 'hub' },
+        { label: 'Workflow', icon: 'account_tree', active: true },
+      ],
+      navFooter: [{ label: 'Settings', icon: 'settings' }],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

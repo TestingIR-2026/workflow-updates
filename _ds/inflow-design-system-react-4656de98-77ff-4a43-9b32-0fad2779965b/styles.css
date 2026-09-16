@@ -1,0 +1,8 @@
+/* =============================================================
+   Inriver Design System — root stylesheet
+   Single entry point for consumers. Link THIS file and you get
+   the full token set, @font-face declarations and base element
+   styles from the single source of truth below.
+   ============================================================= */
+
+@import "inriver-design-tokens.css";
